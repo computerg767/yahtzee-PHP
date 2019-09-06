@@ -44,7 +44,7 @@ function IsChecked($chkname,$value) {
  <?php
 
 $diceNames = ['zero', 'one', 'two', 'three', 'four', 'five'];
-$diceNumbers = [];
+$diceNumbers = [0, 0, 0, 0, 0, 0];
 
 if(isset($_POST['roll'])){
    $_SESSION['rollNum']++;
@@ -54,18 +54,19 @@ if(isset($_POST['roll'])){
    for($i = 1; $i < 6 ;$i++) {
       // adds the number to the die array if present
       if(IsChecked('Dice', $i)){
-         array_push($diceNumbers, $_SESSION['dice_' . $diceNames[$i]]);
+         $diceNumbers[$i] = $_SESSION['dice_' . $diceNames[$i]];
          echo "This dice: " . 'dice_' . $diceNames[$i] . "<br>";
       } else {
          // creates new die number for new roll
-         array_push($diceNumbers, rand(1, 6));
+         $diceNumbers[$i] = rand(1, 6);
+         $_SESSION['dice_' . $diceNames[$i]] = $diceNumbers[$i];
       }
    }
 }
 if(isset($_POST['reset'])){
 $_SESSION['rollNum'] = 0;
-for($i = 0; $i < 5 ;$i++){
-   array_push($diceNumbers, 0);
+for($i = 1; $i < 6 ;$i++){
+   $diceNumbers[$i] = 0;
 }
 }
 ?>
@@ -73,8 +74,7 @@ for($i = 0; $i < 5 ;$i++){
   <table>
    <tr>
     <?php  
-    $arraylength = count($diceNumbers);
-    for($i = 0; $i < $arraylength;$i++) {
+    for($i = 1; $i < 6;$i++) {
          echo "<th>" . $diceNumbers[$i] . "</th>"; 
     }
     ?>
@@ -87,16 +87,11 @@ for($i = 0; $i < 5 ;$i++){
     <th>Hold</th>
    </tr>
    <tr>
-    <th><input type="checkbox" name="Dice[]" value="1" <?php if(isset($_POST['Dice'][0])) {
-        if($_POST['Dice'][0]=="1"){ echo "checked='checked'";}} ?>  /></th>
-    <th><input type="checkbox" name="Dice[]" value="2" <?php if(isset($_POST['Dice'][1])) {
-        if($_POST['Dice'][1]=="2"){ echo "checked='checked'";}} ?> /></th>
-    <th><input type="checkbox" name="Dice[]" value="3" <?php if(isset($_POST['Dice'][2])) {
-        if($_POST['Dice'][2]=="3"){ echo "checked='checked'";}} ?> /></th>
-    <th><input type="checkbox" name="Dice[]" value="4" <?php if(isset($_POST['Dice'][3])) {
-        if($_POST['Dice'][3]=="4"){ echo "checked='checked'";}} ?> /></th>
-    <th><input type="checkbox" name="Dice[]" value="5" <?php if(isset($_POST['Dice'][4])) {
-        if($_POST['Dice'][4]=="5"){ echo "checked='checked'";}} ?>/></th>
+    <th><input type="checkbox" name="Dice[]" value="1"/></th>
+    <th><input type="checkbox" name="Dice[]" value="2"/></th>
+    <th><input type="checkbox" name="Dice[]" value="3"/></th>
+    <th><input type="checkbox" name="Dice[]" value="4"/></th>
+    <th><input type="checkbox" name="Dice[]" value="5"/></th>
    </tr>
    <tr>
     <td>
