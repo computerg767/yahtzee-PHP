@@ -39,7 +39,7 @@ function IsChecked($chkname,$value) {
 
 <body>
 
- <h1>Alpha 1.2</h1>
+ <h1>Alpha 1.3</h1>
 
  <?php
 
@@ -55,6 +55,7 @@ if(isset($_POST['roll'])){
       // adds the number to the die array if present
       if(IsChecked('Dice', $i)){
          $diceNumbers[$i] = $_SESSION['dice_' . $diceNames[$i]];
+         //line below for testing purposes
          echo "This dice: " . 'dice_' . $diceNames[$i] . "<br>";
       } else {
          // creates new die number for new roll
