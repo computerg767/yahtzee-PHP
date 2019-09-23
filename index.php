@@ -48,24 +48,6 @@ function IsChecked($chkname, $value)
 $diceNames = ['zero', 'one', 'two', 'three', 'four', 'five'];
 $diceNumbers = [0, 0, 0, 0, 0, 0];
 
-<<<<<<< HEAD
-if (isset($_POST['roll'])) {
-    ++$_SESSION['rollNum'];
-    // gets the size of the dies
-    $size_diceNames = sizeof($diceNames);
-    // goes through all the dies
-    for ($i = 1; $i < 6; ++$i) {
-        // adds the number to the die array if present
-        if (IsChecked('Dice', $i)) {
-            $diceNumbers[$i] = $_SESSION['dice_'.$diceNames[$i]];
-            echo 'This dice: '.'dice_'.$diceNames[$i].'<br>';
-        } else {
-            // creates new die number for new roll
-            $diceNumbers[$i] = rand(1, 6);
-            $_SESSION['dice_'.$diceNames[$i]] = $diceNumbers[$i];
-        }
-    }
-=======
 if(isset($_POST['roll'])){
    $_SESSION['rollNum']++;
    // gets the size of the dies
@@ -88,7 +70,6 @@ if(isset($_POST['reset'])){
 $_SESSION['rollNum'] = 0;
 for($i = 1; $i < 6 ;$i++){
    $diceNumbers[$i] = 0;
->>>>>>> 9582781a29a23a3c5fd863263e33084bf371419f
 }
 if (isset($_POST['reset'])) {
     $_SESSION['rollNum'] = 0;
